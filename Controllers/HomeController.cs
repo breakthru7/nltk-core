@@ -5,10 +5,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Net.Http;
 using System.Text; 
+using System.Text.Json; 
 using Microsoft.AspNetCore.Mvc;
 using nltk_core;
 using nltk_core.Models;
-using Newtonsoft.Json;
 
 namespace nltk_core.Controllers
 {
@@ -23,7 +23,7 @@ namespace nltk_core.Controllers
 
         public IActionResult Index()
         {
-            var json = JsonConvert.SerializeObject( new { word_list = "This is a sentence with model XGA"}); 
+            var json = JsonSerializer.Serialize( new { word_list = "This is a sentence with model XGA"}); 
             var data = new StringContent(json, Encoding.UTF8, "application/json");
  
             var response =  _client.PostAsync(Constants.url_filter, data).Result;
